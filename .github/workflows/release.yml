@@ -22,7 +22,7 @@ jobs:
             artifact: park-linux
             binary: park
 
-          - os: macos-12
+          - os: macos-14
             artifact: park-macos
             binary: park
 
