@@ -7,7 +7,7 @@ on:
   pull_request:
 
 jobs:
-  generate_fake_data:
+  generate_mock_data:
     runs-on: ubuntu-22.04
 
     steps:
@@ -25,7 +25,7 @@ jobs:
       - name: Generate fake data
         run: |
           mkdir test_data
-          python scripts/generate_fake_data.py test_data/data.parquet 100
+          python scripts/generate_mock_data.py test_data/data.parquet 100
 
       - name: Upload fake data
         uses: actions/upload-artifact@v4
@@ -66,7 +66,7 @@ jobs:
 
   e2e_vm:
     needs:
-      - generate_fake_data
+      - generate_mock_data
       - build
 
     strategy:
