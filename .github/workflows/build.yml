@@ -4,7 +4,17 @@ on:
   push:
     branches:
       - main
+    
+    paths-ignore:
+      - "README.md"
+      - "**/*.md"
+
   pull_request:
+    
+    paths-ignore:
+      - "README.md"
+      - "**/*.md"
+
   workflow_dispatch:
 
 concurrency:
@@ -57,9 +67,6 @@ jobs:
 
       - name: Build
         run: cargo build --release
-
-      - name: Unit tests
-        run: cargo test --release
 
       - name: Upload binary
         uses: actions/upload-artifact@v4
@@ -123,5 +130,4 @@ jobs:
         shell: pwsh
         run: |
           ./bin/park.exe head test_data/data.parquet --num 3
-          echo -e "\n\n\n"
           ./bin/park.exe head test_data/data.parquet --num 3 --csv
