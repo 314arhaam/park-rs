@@ -1,0 +1,122 @@
+name: Build & Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  generate_fake_data:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install requirements
+        run: |
+          pip install -r scripts/requirements.txt
+
+      - name: Generate fake data
+        run: |
+          mkdir test_data
+          python scripts/generate_fake_data.py test_data/data.parquet 100
+
+      - name: Upload fake data
+        uses: actions/upload-artifact@v4
+        with:
+          name: fake-data
+          path: test_data/
+
+  build:
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+          - macos-12
+          - windows-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Unit tests
+        run: cargo test --release
+
+      - name: Upload binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: binary-${{ matrix.os }}
+          path: |
+            target/release/park
+            target/release/park.exe
+
+  e2e_vm:
+    needs:
+      - generate_fake_data
+      - build
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+          - macos-12
+          - windows-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download binary
+        uses: actions/download-artifact@v4
+        with:
+          name: binary-${{ matrix.os }}
+          path: bin/
+
+      - name: Download fake data
+        uses: actions/download-artifact@v4
+        with:
+          name: fake-data
+          path: test_data/
+
+      - name: Make executable (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: chmod +x bin/park
+
+      - name: Run E2E tests subcommand info (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          ./bin/park info test_data/data.parquet
+
+      - name: Run E2E tests subcommand info (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ./bin/park.exe info test_data/data.parquet
+
+      - name: Run E2E tests subcommand head (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          ./bin/park head test_data/data.parquet --num 3
+
+      - name: Run E2E tests subcommand head (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          ./bin/park.exe head test_data/data.parquet --num 3
+          echo -e "\n\n\n"
+          ./bin/park.exe head test_data/data.parquet --num 3 --csv
