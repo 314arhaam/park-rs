@@ -1,5 +1,6 @@
 use clap::{Parser, Subcommand};
 use crate::head;
+use crate::tail;
 use crate::info;
 
 
@@ -12,6 +13,16 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Commands {
     Head {
+        filename: String,
+
+        #[arg(short, long, default_value_t = 5_u32)]
+        num: u32,
+
+        #[arg(short, long, default_value_t = false)]
+        csv: bool,
+    },
+
+    Tail {
         filename: String,
 
         #[arg(short, long, default_value_t = 5_u32)]
@@ -34,6 +45,9 @@ impl Commands {
             }
             Commands::Info { filename } => {
                 info::subcommand(filename)?
+            }
+            Commands::Tail { filename, num, csv } => {
+                tail::subcommand(filename, num, csv)?
             }
         };
         Ok(res)
