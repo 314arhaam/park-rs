@@ -16,6 +16,9 @@ pub enum Commands {
 
         #[arg(short, long, default_value_t = 5_u32)]
         num: u32,
+
+        #[arg(short, long, default_value_t = false)]
+        csv: bool,
     },
 
     Info {
@@ -26,8 +29,8 @@ pub enum Commands {
 impl Commands {
     pub fn run(&self) -> Result<(), Box<dyn std::error::Error>>{
         let res = match self {
-            Commands::Head { filename, num } => {
-                head::subcommand(filename, num)?
+            Commands::Head { filename, num, csv } => {
+                head::subcommand(filename, num, csv)?
             }
             Commands::Info { filename } => {
                 info::subcommand(filename)?
