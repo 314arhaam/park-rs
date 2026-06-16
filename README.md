@@ -64,11 +64,22 @@ park head <file.parquet> --num 10
 
 ---
 
+### tail
+
+Display the first rows of a Parquet file.
+
+```sh
+park tail <file.parquet> --num 10
+```
+
+---
+
 ## Example
 
 ```sh
 park info users.parquet
-park head users.parquet --num 5
+park head users.parquet --num 5 [--csv]
+park tail users.parquet --num 3 [--csv]
 ```
 
 ---
