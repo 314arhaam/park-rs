@@ -1,31 +1,93 @@
 # Park
 
-A CLI tool for parquet files, written in Rust #rust #data
+A fast CLI tool for inspecting **Parquet files**, written in Rust.
 
-```sh
-Usage: park <COMMAND>
+---
 
-Commands:
-  head  
-  info  
-  help  Print this message or the help of the given subcommand(s)
+## Features
 
-Options:
-  -h, --help  Print help
-```
+- View Parquet file metadata
+- Preview rows (head)
+- Lightweight and fast (no Python required)
+- Cross-platform (Linux, macOS, Windows)
 
-## Subcommands
+---
 
-### `info`
+## Installation
 
-Get file info
-
-### `head`
-
-Get file head
-
-## Install
+### Recommended (Install Script)
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/314arhaam/park-rs/main/install.sh | bash
 ```
+
+### Manual Install (GitHub Releases)
+
+Download the latest binary from:
+https://github.com/314arhaam/park-rs/releases
+
+---
+
+## Usage
+
+```sh
+park <COMMAND>
+```
+
+### Help
+
+```sh
+park --help
+```
+
+---
+
+## Commands
+
+### info
+
+Display metadata and schema information for a Parquet file.
+
+```sh
+park info <file.parquet>
+```
+
+---
+
+### head
+
+Display the first rows of a Parquet file.
+
+```sh
+park head <file.parquet> --num 10
+```
+
+---
+
+## Example
+
+```sh
+park info users.parquet
+park head users.parquet --num 5
+```
+
+---
+
+## Why Park?
+
+A minimal CLI alternative to heavier tooling for quickly inspecting Parquet files.
+
+---
+
+## Development
+
+```sh
+cargo build --release
+cargo run -- head data.parquet
+```
+
+---
+
+## License
+
+MIT
