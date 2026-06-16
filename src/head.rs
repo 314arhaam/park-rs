@@ -5,7 +5,7 @@ pub fn subcommand(filename: &String, num: &u32, csv: &bool) -> Result<(), Box<dy
     let file = std::fs::File::open(std::path::Path::new(filename))?;
     let data = parquet::file::reader::SerializedFileReader::new(file)?;
     let metadata = data.metadata();
-    let n_rows = metadata.file_metadata().num_rows();
+    let _n_rows = metadata.file_metadata().num_rows();
     /*let rows_to_take = if (*num) as i64 > n_rows {
         n_rows as usize
     } else {

@@ -1,4 +1,4 @@
-use parquet::file::{metadata::{self, ParquetMetaData}, reader::{FileReader, SerializedFileReader}};
+use parquet::file::{metadata::{ParquetMetaData}, reader::{FileReader, SerializedFileReader}};
 use std::fs::File;
 
 pub fn get_column_names(metadata: &ParquetMetaData) -> Vec<String> {
@@ -14,7 +14,6 @@ pub fn subcommand(filename: &String) -> Result<(), Box<dyn std::error::Error>>{
     let file = File::open(&filename)?;
     let data = SerializedFileReader::new(file)?;
     let metadata = data.metadata();
-    let column_names = get_column_names(metadata);
     println!("{:#?}", metadata.file_metadata().schema().get_fields());
     Ok(())
 }
