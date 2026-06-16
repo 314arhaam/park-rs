@@ -7,3 +7,7 @@ edition = "2024"
 clap = { version = "4", features = ["derive"] }
 parquet = "54"
 arrow = "54"
+
+[[bin]]
+name = "park"
+path = "src/main.rs"
