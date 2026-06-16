@@ -31,3 +31,4 @@ target
 *.test
 *.parquet
 data/
+*.pdf
