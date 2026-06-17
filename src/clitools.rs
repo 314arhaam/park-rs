@@ -1,8 +1,5 @@
 use clap::{Parser, Subcommand, ValueEnum};
-use crate::head;
-use crate::tail;
-use crate::info;
-use crate::shape;
+use crate::commands::{head, info, tail, shape};
 
 #[derive(Clone, ValueEnum)]
 pub enum Format {

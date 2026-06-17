@@ -1,5 +1,5 @@
 use parquet::file::reader::FileReader;
-use crate::info;
+use crate::commands::info;
 use crate::clitools;
 use comfy_table::{Table, presets::UTF8_FULL};
 
@@ -22,7 +22,7 @@ pub fn subcommand(filename: &String, num: &u32, format: &clitools::Format) -> Re
         }
         _ => {}
     }
-    for line in data.into_iter().take((*num) as usize) {
+    for line in data.into_iter().skip((_n_rows - ((*num) as i64)) as usize) {
         let v = line?;
         match *format {
             clitools::Format::Csv => {
