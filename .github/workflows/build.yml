@@ -124,24 +124,24 @@ jobs:
         if: runner.os != 'Windows'
         run: |
           ./bin/park head test_data/data.parquet --num 3
-          ./bin/park head test_data/data.parquet --num 3 --csv
+          ./bin/park head test_data/data.parquet --num 3 --format csv
 
       - name: Run E2E tests subcommand head (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
           ./bin/park.exe head test_data/data.parquet --num 3
-          ./bin/park.exe head test_data/data.parquet --num 3 --csv
+          ./bin/park.exe head test_data/data.parquet --num 3 --format csv
 
       - name: Run E2E tests subcommand tail (Linux/macOS)
         if: runner.os != 'Windows'
         run: |
           ./bin/park tail test_data/data.parquet --num 3
-          ./bin/park tail test_data/data.parquet --num 3 --csv
+          ./bin/park tail test_data/data.parquet --num 3 --format csv
 
       - name: Run E2E tests subcommand head (Windows)
         if: runner.os == 'Windows'
         shell: pwsh
         run: |
           ./bin/park.exe tail test_data/data.parquet --num 3
-          ./bin/park.exe tail test_data/data.parquet --num 3 --csv
+          ./bin/park.exe tail test_data/data.parquet --num 3 --format csv
