@@ -2,6 +2,7 @@ use clap::{Parser, Subcommand, ValueEnum};
 use crate::head;
 use crate::tail;
 use crate::info;
+use crate::shape;
 
 #[derive(Clone, ValueEnum)]
 pub enum Format {
@@ -40,6 +41,10 @@ pub enum Commands {
 
     Info {
         filename: String,
+    },
+
+    Shape {
+        filename: String,
     }
 }
 
@@ -54,6 +59,9 @@ impl Commands {
             }
             Commands::Tail { filename, num, format } => {
                 tail::subcommand(filename, num, format)?
+            }
+            Commands::Shape { filename } => {
+                shape::subcommand(filename)?
             }
         };
         Ok(res)
