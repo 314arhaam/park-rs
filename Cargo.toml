@@ -7,6 +7,7 @@ edition = "2024"
 clap = { version = "4", features = ["derive"] }
 parquet = "54"
 arrow = "54"
+comfy-table = "7"
 
 [[bin]]
 name = "park"
