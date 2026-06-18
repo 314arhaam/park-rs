@@ -1,10 +1,6 @@
 use parquet::file::{metadata::{ParquetMetaData}, reader::{FileReader, SerializedFileReader}};
 use std::fs::File;
 
-struct Info {
-    num_rows: i64,
-}
-
 pub fn get_column_names(metadata: &ParquetMetaData) -> Vec<String> {
     let mut columns: Vec<String> = vec![];
     for col in metadata.file_metadata().schema().get_fields() {

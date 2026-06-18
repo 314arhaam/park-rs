@@ -1,6 +1,6 @@
-use parquet::file::{metadata::{ParquetMetaData}, reader::{FileReader, SerializedFileReader}};
+use parquet::file::{reader::{FileReader, SerializedFileReader}};
 use std::fs::File;
-use crate::info;
+use crate::commands::info;
 
 pub fn subcommand(filename: &String) -> Result<(), Box<dyn std::error::Error>> {
     let file = File::open(&filename)?;
