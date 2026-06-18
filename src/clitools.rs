@@ -1,5 +1,5 @@
 use clap::{Parser, Subcommand, ValueEnum};
-use crate::commands::{head, info, tail, shape};
+use crate::commands::{head, info, tail, shape, columns};
 
 #[derive(Clone, ValueEnum)]
 pub enum Format {
@@ -42,6 +42,10 @@ pub enum Commands {
 
     Shape {
         filename: String,
+    },
+
+    Columns {
+        filename: String,
     }
 }
 
@@ -59,6 +63,9 @@ impl Commands {
             }
             Commands::Shape { filename } => {
                 shape::subcommand(filename)?
+            }
+            Commands::Columns { filename } => {
+                columns::subcommand(filename)?
             }
         };
         Ok(res)
