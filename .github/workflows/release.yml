@@ -84,7 +84,7 @@ jobs:
       - name: Install with script ${{ matrix.os }}
         shell: bash
         run: |
-          sudo curl -fsSL https://raw.githubusercontent.com/314arhaam/park-rs/main/install.sh | bash
+          curl -fsSL https://raw.githubusercontent.com/314arhaam/park-rs/main/install.sh | bash
       
       - name: Get Park help ${{ matrix.os }}
         shell: bash
