@@ -41,7 +41,7 @@ VERSION=$(curl -fsSL \
     | grep '"tag_name":' \
     | sed -E 's/.*"([^"]+)".*/\1/')
 
-ASSET="${BINARY_NAME}-${PLATFORM}-${ARCH}.${EXT}"
+ASSET="${BINARY_NAME}-${PLATFORM}.${EXT}"
 
 URL="https://github.com/${REPO}/releases/download/${VERSION}/${ASSET}"
 
