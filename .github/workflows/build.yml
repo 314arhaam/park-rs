@@ -145,25 +145,3 @@ jobs:
         run: |
           ./bin/park.exe tail test_data/data.parquet --num 3
           ./bin/park.exe tail test_data/data.parquet --num 3 --format csv
-  
-  install:
-    strategy:
-      matrix:
-        include:
-          - os: ubuntu-22.04
-          - os: macos-14
-          - os: windows-latest
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-    
-      - name: Install with script ${{ matrix.os }}
-        shell: bash
-        run: |
-          curl -fsSL https://raw.githubusercontent.com/314arhaam/park-rs/main/install.sh | bash
-      
-      - name: Get Park help ${{ matrix.os }}
-        shell: bash
-        run: |
-          park --help

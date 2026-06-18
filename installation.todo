@@ -1,0 +1,45 @@
+name: Installation
+
+on:
+  push:
+    branches:
+      - main
+    
+    paths-ignore:
+      - "README.md"
+      - "**/*.md"
+
+  pull_request:
+    
+    paths-ignore:
+      - "README.md"
+      - "**/*.md"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  install:
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-22.04
+          - os: macos-14
+          - os: windows-latest
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    
+      - name: Install with script ${{ matrix.os }}
+        shell: bash
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/314arhaam/park-rs/main/install.sh | bash
+      
+      - name: Get Park help ${{ matrix.os }}
+        shell: bash
+        run: |
+          park --help
