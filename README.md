@@ -1,5 +1,8 @@
 # Park
 
+[![Build & Test](https://github.com/314arhaam/park-rs/actions/workflows/build.yml/badge.svg)](https://github.com/314arhaam/park-rs/actions/workflows/build.yml)
+[![Release](https://github.com/314arhaam/park-rs/actions/workflows/release.yml/badge.svg)](https://github.com/314arhaam/park-rs/actions/workflows/release.yml)
+
 A fast CLI tool for inspecting **Parquet files**, written in Rust.
 
 ---
