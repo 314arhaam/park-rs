@@ -46,7 +46,7 @@ pub fn subcommand(filename: &String, num: &u32, format: &clitools::Format) -> Re
     }
     match *format {
         clitools::Format::Table => {
-            print!("{table}");
+            println!("{table}");
         }
         _ => {}
     }
