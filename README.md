@@ -5,6 +5,11 @@
 
 A fast CLI tool for inspecting **Parquet files**, written in Rust.
 
+<p align="center">
+  <img src="https://github.com/314arhaam/park-rs/blob/main/assets/file_000000005be472438d720896bc63d858.png" width="1080" title="Park and Parquet">
+</p>  
+
+
 ```sh
 $ park tail test_10k.parquet 
 ┌───────────────────────┬────────────────────────────────────────┬──────────────┬────────┐
