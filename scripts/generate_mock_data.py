@@ -7,7 +7,7 @@ if __name__ == '__main__':
         num = int(sys.argv[2])
     except IndexError:
         filename = "test.parquet"
-        num = 10
+        num = 10_000
     print(f"[*] generate data: `{filename}`, `{num}`")
     data = {
         "date_": [],
@@ -33,6 +33,7 @@ if __name__ == '__main__':
         data["user_name"].append(tmp_name)
         data["score"].append(round(random.random()*100, 3))
     df = pd.DataFrame(data)
+    df.reset_index(inplace = True)
     print(df.head())
     print(df.shape)
     df.to_parquet(filename)
