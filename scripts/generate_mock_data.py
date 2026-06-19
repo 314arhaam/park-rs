@@ -7,7 +7,7 @@ if __name__ == '__main__':
         num = int(sys.argv[2])
     except IndexError:
         filename = "test.parquet"
-        num = 10
+        num = 10_000
     print(f"[*] generate data: `{filename}`, `{num}`")
     data = {
         "date_": [],
