@@ -3,7 +3,6 @@ use std::thread;
 pub struct Profiler {
     elapsed_time: u128,
     peak_ram_usage: u64,
-    average_ram_usage: u64,
 }
 
 impl Profiler {
@@ -11,13 +10,11 @@ impl Profiler {
         Self {
             elapsed_time: 0_u128, 
             peak_ram_usage: 0_u64,
-            average_ram_usage: 0_u64,
         }
     }
     pub fn run(&mut self, rx: std::sync::mpsc::Receiver<bool>) {
         let start_time = std::time::Instant::now();
-        let mut ram_sampler: Vec<u64> = vec![];
-        let mut mem_usage: u64 = 0;
+        let mut mem_usage: u64;
         let pid = sysinfo::get_current_pid().unwrap();
         let mut system = sysinfo::System::new();
         system.refresh_all();
@@ -26,8 +23,8 @@ impl Profiler {
             // do the job here
             // ram_sampler.push(process.memory());
             mem_usage = process.memory();
-            self.average_ram_usage = if self.average_ram_usage > process.memory() {
-                self.average_ram_usage
+            self.peak_ram_usage = if self.peak_ram_usage > process.memory() {
+                self.peak_ram_usage
             } else {
                 mem_usage
             };
@@ -39,7 +36,7 @@ impl Profiler {
         }
         self.elapsed_time = start_time.elapsed().as_millis();
         // self.average_ram_usage = rams; // ram_sampler.iter().sum();
-        let len: u64  = ram_sampler.iter().len() as u64;
-        println!("{} {}", self.elapsed_time, self.average_ram_usage/1024);
+        // let len: u64  = ram_sampler.iter().len() as u64;
+        println!("[*] Elapsed Time:\t{}\tPeak Memory Usage:\t{}", self.elapsed_time, self.peak_ram_usage/1024);
     }
 }
