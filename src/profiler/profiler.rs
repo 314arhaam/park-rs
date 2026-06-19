@@ -19,6 +19,7 @@ impl Profiler {
         let mut system = sysinfo::System::new();
         system.refresh_all();
         let process = system.process(pid).unwrap();
+        let sampling_freq_micro_seconds: u64 = 100;
         'main_loop: loop {
             // do the job here
             // ram_sampler.push(process.memory());
@@ -29,7 +30,7 @@ impl Profiler {
                 mem_usage
             };
             // end logic
-            thread::sleep(std::time::Duration::from_micros(10_u64));
+            thread::sleep(std::time::Duration::from_micros(sampling_freq_micro_seconds));
             if let Ok(_msg) = rx.try_recv() {
                 break 'main_loop;
             }
