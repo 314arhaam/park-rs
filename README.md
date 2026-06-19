@@ -6,7 +6,7 @@
 A fast CLI tool for inspecting **Parquet files**, written in Rust.
 
 ```sh
-park tail test_10k.parquet 
+$ park tail test_10k.parquet 
 ┌───────────────────────┬────────────────────────────────────────┬──────────────┬────────┐
 │ date_                 ┆ user_id                                ┆ user_name    ┆ score  │
 ╞═══════════════════════╪════════════════════════════════════════╪══════════════╪════════╡
