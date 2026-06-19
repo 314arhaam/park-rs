@@ -32,3 +32,4 @@ target
 *.parquet
 data/
 *.pdf
+.env
