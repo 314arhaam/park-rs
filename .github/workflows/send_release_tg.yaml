@@ -24,7 +24,7 @@ jobs:
         uses: robinraju/release-downloader@v1
         with:
           tag: ${{ github.event.inputs.tag }}
-          fileName: 'alpyne-*'
+          fileName: 'park-*'
           tarBall: false
           zipBall: false
 
@@ -35,7 +35,7 @@ jobs:
         run: | 
           echo "Calculating checksums..."
           # For each expected binary, generate checksum
-          for f in alpyne-linux-amd64 alpyne-darwin-amd64 alpyne-windows-amd64.exe; do
+          for f in park-linux.tar.gz park-macos.tar.gz park-windows.zip; do
             if [[ -f "$f" ]]; then
               sha256sum "$f" >> checksums.txt
             fi
@@ -71,7 +71,7 @@ jobs:
           echo "Uploading binaries to Telegram..."
 
           # Loop through known binaries
-          for FILE in alpyne-linux-amd64 alpyne-darwin-amd64 alpyne-windows-amd64.exe; do
+          for FILE in park-linux.tar.gz park-macos.tar.gz park-windows.zip; do
             if [[ -f "$FILE" ]]; then
               CHECKSUM=$(grep "$FILE" checksums.txt | awk '{print $1}')
               CAPTION="📦 \ 
