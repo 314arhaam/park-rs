@@ -8,6 +8,7 @@ clap = { version = "4", features = ["derive"] }
 parquet = "54"
 arrow = "54"
 comfy-table = "7"
+sysinfo = "0.39"
 
 [[bin]]
 name = "park"
