@@ -8,12 +8,14 @@ on:
     paths-ignore:
       - "README.md"
       - "**/*.md"
+      - "**/*.png"
 
   pull_request:
     
     paths-ignore:
       - "README.md"
       - "**/*.md"
+      - "**/*.png"
 
   workflow_dispatch:
 
