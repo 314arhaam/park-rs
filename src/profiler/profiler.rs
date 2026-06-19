@@ -37,6 +37,6 @@ impl Profiler {
         self.elapsed_time = start_time.elapsed().as_millis();
         // self.average_ram_usage = rams; // ram_sampler.iter().sum();
         // let len: u64  = ram_sampler.iter().len() as u64;
-        println!("[*] Elapsed Time:\t{}\tPeak Memory Usage:\t{}", self.elapsed_time, self.peak_ram_usage/1024);
+        println!("\n[*] Elapsed Time: {} ms\n[*] Peak Memory Usage:\t{} KiB", self.elapsed_time, self.peak_ram_usage/1024);
     }
 }
