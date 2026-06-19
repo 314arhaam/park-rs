@@ -4,19 +4,18 @@ import uuid, random, datetime, sys
 if __name__ == '__main__':
     try: 
         filename = sys.argv[1]
-        num = sys.argv[2]
+        num = int(sys.argv[2])
     except IndexError:
         filename = "test.parquet"
         num = 10
     print(f"[*] generate data: `{filename}`, `{num}`")
-    n = 10
     data = {
         "date_": [],
         "user_id": [],
         "user_name": [],
         "score": []
     }
-    for i in range(n):
+    for i in range(num):
         data["date_"].append(
             datetime.datetime(
                 year = 2025,
@@ -35,4 +34,5 @@ if __name__ == '__main__':
         data["score"].append(round(random.random()*100, 3))
     df = pd.DataFrame(data)
     print(df.head())
+    print(df.shape)
     df.to_parquet(filename)
